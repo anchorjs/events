@@ -1,5 +1,5 @@
-define(['test.events',
-        'test.events.emitter'],
+define(['./test.events',
+        './test.events.emitter'],
 function() {
   return {}
 });
