@@ -12,8 +12,7 @@ require(['require',
 function(require, _mocha, _chai) {
   mocha.setup('bdd');
   
-  require(['test.events',
-           'test.events.emitter'],
+  require(['suite'],
   function() {
     mocha.run();
   });
