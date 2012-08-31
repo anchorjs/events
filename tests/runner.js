@@ -1,8 +1,8 @@
 require.config({
   paths:{
     'events': '../',
-    'mocha': 'vendor/mocha/1.0.1/mocha',
-    'chai': 'vendor/chai/0.5.2/chai'
+    'mocha': 'vendor/mocha/mocha',
+    'chai': 'vendor/chai/chai'
   }
 });
 
