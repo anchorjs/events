@@ -1,7 +1,5 @@
-define(['events/lib/emitter',
-        'chai'],
-function(Emitter, chai) {
-  var expect = chai.expect;
+define(['events/lib/emitter'],
+function(Emitter) {
 
   describe("Emitter", function() {
     
