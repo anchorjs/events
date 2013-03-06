@@ -11,6 +11,27 @@ function(Emitter) {
       expect(Emitter.prototype.removeListener).to.be.equal(Emitter.prototype.off);
     });
     
+    
+    describe("emit", function() {
+      var emitter = new Emitter();
+      var fooSpy = [];
+      
+      emitter.on('foo', function() {
+        fooSpy.push({});
+      });
+    
+      it('should call listener with zero arguments', function() {
+        var rv = emitter.emit('foo');
+        expect(rv).to.be.true;
+        expect(fooSpy).to.have.length(1);
+      });
+      
+      it('should not call unknown listener', function() {
+        var rv = emitter.emit('fubar');
+        expect(rv).to.be.false;
+      });
+    });
+    
   });
   
   return { name: "test.events.emitter" }
