@@ -18,7 +18,6 @@ function(Emitter) {
       var barSpy = [];
       var bazSpy = [];
       var bixSpy = [];
-      var mixSpy = [];
       
       emitter.on('foo', function() {
         fooSpy.push({});
@@ -34,14 +33,6 @@ function(Emitter) {
       
       emitter.on('bix', function(a1, a2, a3) {
         bixSpy.push({ a1: a1, a2: a2, a3: a3 });
-      });
-      
-      emitter.on('mix', function(a1) {
-        mixSpy.push({ ml1: a1 });
-      });
-      
-      emitter.on('mix', function(a1) {
-        mixSpy.push({ ml2: a1 });
       });
     
       it('should call listener with zero arguments', function() {
@@ -78,17 +69,65 @@ function(Emitter) {
         expect(bixSpy[0].a3).to.be.equal('3');
       });
       
-      it('should call multiple listeners', function() {
+      it('should not call unknown listener', function() {
+        var rv = emitter.emit('fubar');
+        expect(rv).to.be.false;
+      });
+    });
+    
+    describe("addListener", function() {
+      var emitter = new Emitter();
+      var newListenerSpy = [];
+      var mixSpy = [];
+      var maxSpy = [];
+      
+      emitter.on('newListener', function(type, listener) {
+        newListenerSpy.push({ type: type, listener: listener });
+      });
+      
+      emitter.on('mix', function(a1) {
+        mixSpy.push({ ml1: a1 });
+      });
+      
+      emitter.on('mix', function(a1) {
+        mixSpy.push({ ml2: a1 });
+      });
+      
+      emitter.on('max', function(a1) {
+        maxSpy.push({ ml1: a1 });
+      });
+      
+      emitter.on('max', function(a1) {
+        maxSpy.push({ ml2: a1 });
+      });
+      
+      emitter.on('max', function(a1) {
+        maxSpy.push({ ml3: a1 });
+      });
+    
+      it('should call two listeners', function() {
         var rv = emitter.emit('mix', '1');
         expect(rv).to.be.true;
         expect(mixSpy).to.have.length(2);
         expect(mixSpy[0].ml1).to.be.equal('1');
         expect(mixSpy[1].ml2).to.be.equal('1');
       });
+    
+      it('should call three listeners', function() {
+        var rv = emitter.emit('max', '2');
+        expect(rv).to.be.true;
+        expect(maxSpy).to.have.length(3);
+        expect(maxSpy[0].ml1).to.be.equal('2');
+        expect(maxSpy[1].ml2).to.be.equal('2');
+        expect(maxSpy[2].ml3).to.be.equal('2');
+      });
       
-      it('should not call unknown listener', function() {
-        var rv = emitter.emit('fubar');
-        expect(rv).to.be.false;
+      it('should call new listener', function() {
+        expect(newListenerSpy).to.have.length(5);
+        expect(newListenerSpy[0].type).to.be.equal('mix');
+        expect(newListenerSpy[0].listener).to.be.a('function');
+        expect(newListenerSpy[2].type).to.be.equal('max');
+        expect(newListenerSpy[2].listener).to.be.a('function');
       });
     });
     
