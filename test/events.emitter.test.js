@@ -131,6 +131,26 @@ function(Emitter) {
       });
     });
     
+    describe("once", function() {
+      var emitter = new Emitter();
+      var fooSpy = [];
+      
+      emitter.once('foo', function(a1) {
+        fooSpy.push({ a1: a1 });
+      });
+      
+      it('should call listener once', function() {
+        var rv = emitter.emit('foo', '1');
+        expect(rv).to.be.true;
+        expect(fooSpy).to.have.length(1);
+        expect(fooSpy[0].a1).to.be.equal('1');
+        
+        rv = emitter.emit('foo', '2');
+        expect(rv).to.be.false;
+        expect(fooSpy).to.have.length(1);
+      });
+    });
+    
   });
   
   return { name: "test.events.emitter" }
