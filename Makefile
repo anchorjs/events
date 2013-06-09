@@ -2,10 +2,10 @@ SOURCES = main.js lib/*.js
 TESTS = test/*.test.js
 
 # ==============================================================================
-# Bundling
+# Packaging
 # ==============================================================================
 
-bundle-browserify:
+build-browserify:
 	browserify -t deamdify main.js -o bundle.js
 
 
