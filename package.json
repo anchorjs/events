@@ -1,7 +1,7 @@
 {
   "name": "events",
   "version": "0.0.0",
-  "description": "Events module for Anchor.js.",
+  "description": "Event emitting and listening.",
   "repository": {
     "type": "git",
     "url": "git://github.com/anchorjs/events.git"

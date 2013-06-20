@@ -1,0 +1,12 @@
+{
+  "name": "events",
+  "version": "0.0.0",
+  "description": "Event emitting and listening.",
+  "repo": "anchorjs/events",
+  "main": "main.js",
+  "scripts": [
+    "main.js",
+    "lib/emitter.js"
+  ],
+  "license": "MIT"
+}
