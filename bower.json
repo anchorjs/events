@@ -1,0 +1,25 @@
+{
+  "name": "events",
+  "version": "0.0.0",
+  "description": "Event emitting and listening.",
+  "authors": {
+    "name": "Jared Hanson",
+    "email": "jaredhanson@gmail.com",
+    "homepage": "http://www.jaredhanson.net/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/anchorjs/events.git"
+  },
+  "license": "MIT",
+  "main": "main.js",
+  "ignore": [
+    ".gitignore",
+    ".jshintrc",
+    "Makefile",
+    "README.md",
+    "component.json",
+    "package.json",
+    "test"
+  ]
+}
